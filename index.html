@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Purificare - Limpeza de Ar Condicionado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+/* Checkbox invisível */
+.enviado-checkbox {
+    display: none;
+}
+
+/* Mensagem de sucesso */
+.mensagem-sucesso {
+    color: green;
+    font-size: 13px;
+    margin-top: 8px;
+    display: none; /* inicialmente escondida */
+}
+
+/* Quando o checkbox estiver marcado, mostra a mensagem */
+.enviado-checkbox:checked ~ .mensagem-sucesso {
+    display: block;
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-image: url('wallpaper.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #333;
+            scroll-behavior: smooth; /* rolagem suave */
+        }
+
+        /* ANIMAÇÕES */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HEADER */
+        header {
+            background-color: #e6f2fb;
+            padding: 15px 30px;
+            border-bottom: 2px solid #cce4f6;
+            animation: slideDown 0.8s ease;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-header {
+            height: 50px;
+        }
+
+        .info {
+            display: flex;
+            gap: 25px;
+            font-size: 14px;
+            color: #1f4f7a;
+            flex-wrap: wrap;
+        }
+
+        .info a {
+            color: #1f4f7a;
+            text-decoration: none;
+        }
+
+        .info a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-contato {
+            background-color: #2b7dbf;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-contato:hover {
+            background-color: #1f5f94;
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* MAIN */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .conteudo {
+            display: flex; 
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        /* COLUNAS */
+        .coluna-esquerda, .coluna-direita {
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .divisao {
+            width: 2px;
+            background-color: #cce4f6;
+        }
+
+        /* ORÇAMENTO E FAQ */
+        .orcamento, .faq, .beneficios, .como-funciona {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            opacity: 0;
+            animation: slideUpFade 0.8s forwards;
+        }
+
+        .orcamento { animation-delay: 0.2s; }
+        .faq { animation-delay: 0.4s; }
+        .beneficios { animation-delay: 0.6s; }
+        .como-funciona { animation-delay: 0.8s; }
+
+        .orcamento h2, .faq h2, .beneficios h2, .como-funciona h2 {
+            color: #2b7dbf;
+            margin-bottom: 15px;
+        }
+
+        .orcamento input, .orcamento textarea {
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #cce4f6;
+            transition: 0.3s;
+        }
+
+        .orcamento input:focus, .orcamento textarea:focus {
+            border-color: #2b7dbf;
+            box-shadow: 0 0 6px rgba(43,125,191,0.4);
+            outline: none;
+        }
+
+        .orcamento textarea {
+            height: 220px;
+            resize: none;
+        }
+
+        .orcamento button {
+            width: 100%;
+            background-color: #2b7dbf;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .orcamento button:hover {
+            background-color: #1f5f94;
+            transform: scale(1.05);
+        }
+
+        /* BENEFÍCIOS E COMO FUNCIONA */
+        .beneficio, .passo {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #1f4f7a;
+            line-height: 1.5;
+            transition: transform 0.3s, background-color 0.3s;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .beneficio:hover, .passo:hover {
+            transform: translateX(5px);
+            background-color: #f0f8ff;
+        }
+
+        /* FAQ */
+        .accordion {
+            margin-bottom: 10px;
+        }
+
+        .accordion input {
+            display: none;
+        }
+
+        .accordion label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e6f2fb;
+            padding: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #1f4f7a;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .accordion label:hover {
+            background-color: #d0e7fa;
+            transform: scale(1.02);
+        }
+
+        .accordion label::after {
+            content: "+";
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .accordion input:checked + label::after {
+            content: "−";
+        }
+
+        .conteudo-accordion {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            padding: 0 14px;
+        }
+
+        .accordion input:checked ~ .conteudo-accordion {
+            max-height: 500px;
+            padding: 14px;
+        }
+
+        .conteudo-accordion p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #e6f2fb;
+            padding: 20px;
+            border-top: 2px solid #cce4f6;
+            position: relative;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social a {
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social a:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp { background: #25d366; }
+        .instagram { background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af); }
+        .email-footer { background: #2b7dbf; }
+
+        .localizacao {
+            color: #1f4f7a;
+            font-size: 14px;
+        }
+
+        /* BOTÃO VOLTAR AO TOPO */
+        #backToTop {
+            position: fixed;
+            bottom: 80px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(43,125,191,0.6); /* transparente */
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 999;
+        }
+
+        #backToTop:hover {
+            background-color: #2b7dbf; /* opaco no hover */
+            transform: scale(1.1);
+        }
+
+        /* RESPONSIVO */
+        @media(max-width: 900px) {
+            .conteudo {
+                flex-direction: column;
+            }
+            .divisao {
+                display: none;
+            }
+            .header-container {
+                justify-content: center;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-container">
+        <img src="logo.png" alt="Logo Purificare" class="logo-header">
+        <div class="info">
+            <a href="https://wa.me/5548998463864" target="_blank">📞 (48) 99846-3864</a>
+            <a href="mailto:purificare@tutanota.com" target="_blank">✉️ purificare@tutanota.com</a>
+            <span title="Atendemos fora do horário comercial e aos domingos com acréscimo no serviço">⏰ Seg-Sáb: 08:00 - 20:00</span>
+
+        </div>
+        <a href="https://wa.me/5548998463864" target="_blank" class="btn-contato">Entrar em contato</a>
+    </div>
+</header>
+
+<main>
+    <div class="conteudo">
+
+        <!-- COLUNA ESQUERDA -->
+        <div class="coluna-esquerda">
+
+            <!-- ORÇAMENTO -->
+            <div class="orcamento">
+    <h2>Solicite um orçamento</h2>
+
+<form action="https://formsubmit.co/purificare@tutanota.com" method="POST">
+
+    <!-- Configurações -->
+    <input type="hidden" name="_subject" value="Novo orçamento - Purificare">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+
+    <!-- Campos -->
+    <input type="text" name="Nome" placeholder="Nome" required>
+    <input type="tel" name="Telefone" placeholder="Telefone" required>
+    <input type="email" name="Email" placeholder="E-mail" required>
+    <textarea name="Mensagem" placeholder="Mensagem" required></textarea>
+
+    <!-- Checkbox invisível para controlar mensagem -->
+    <input type="checkbox" id="enviado" class="enviado-checkbox">
+
+    <!-- Botão de envio -->
+    <label for="enviado">
+        <button type="submit">Enviar</button>
+    </label>
+
+    <!-- Mensagem em verde -->
+    <p class="mensagem-sucesso">Mensagem enviada! Retornaremos em breve.</p>
+
+</form>
+
+</div>
+
+
+            <!-- FAQ -->
+            <div class="faq">
+                <h2>Perguntas Frequentes</h2>
+
+                <div class="accordion">
+                    <input type="checkbox" id="freq1">
+                    <label for="freq1">Com que frequência devo limpar o ar-condicionado?</label>
+                    <div class="conteudo-accordion">
+                        <p>Recomendamos limpeza completa a cada 6 meses para uso residencial, garantindo eficiência e saúde do ambiente.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <input type="checkbox" id="freq2">
+                    <label for="freq2">Quanto tempo leva o serviço?</label>
+                    <div class="conteudo-accordion">
+                        <p>O serviço de limpeza completa geralmente leva entre 1 a 2 horas, dependendo do tipo e tamanho do aparelho.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <input type="checkbox" id="freq3">
+                    <label for="freq3">Vocês usam produtos seguros para saúde?</label>
+                    <div class="conteudo-accordion">
+                        <p>Sim! Todos os produtos são não-tóxicos, aprovados para uso residencial e seguros para crianças e pets.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <input type="checkbox" id="freq4">
+                    <label for="freq4">Atendem empresas e residências?</label>
+                    <div class="conteudo-accordion">
+                        <p>Sim! Atendemos residências, escritórios e comércios em Florianópolis e região.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <input type="checkbox" id="freq5">
+                    <label for="freq5">Qual é o valor médio da limpeza?</label>
+                    <div class="conteudo-accordion">
+                        <p>O valor da limpeza varia entre <strong>R$150 e R$300</strong>, dependendo do tipo e tamanho do aparelho.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <input type="checkbox" id="freq6">
+                    <label for="freq6">Quais formas de pagamento são aceitas?</label>
+                    <div class="conteudo-accordion">
+                        <p>Aceitamos Pix, cartões de débito e crédito, transferência bancária e dinheiro.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <input type="checkbox" id="freq7">
+                    <label for="freq7">Há garantia ou acompanhamento após a limpeza?</label>
+                    <div class="conteudo-accordion">
+                        <p>Sim! Garantimos a eficiência da limpeza realizada e orientamos cuidados para manter o aparelho limpo por mais tempo.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="divisao"></div>
+
+        <!-- COLUNA DIREITA -->
+        <div class="coluna-direita">
+
+            <!-- BENEFÍCIOS -->
+            <div class="beneficios">
+                <h2>Benefícios da Limpeza de Ar Condicionado</h2>
+
+                <div class="beneficio">
+                    <span>💡</span>
+                    <p><strong>Economia de energia:</strong> aparelhos limpos consomem menos eletricidade, reduzindo o esforço do compressor e podendo diminuir o consumo em até 60%.</p>
+                </div>
+
+                <div class="beneficio">
+                    <span>🫁</span>
+                    <p><strong>Mais saúde:</strong> a limpeza remove poeira, fungos e bactérias, prevenindo alergias e problemas respiratórios.</p>
+                </div>
+
+                <div class="beneficio">
+                    <span>🛠️</span>
+                    <p><strong>Maior vida útil:</strong> reduz desgaste e evita falhas técnicas, prolongando a vida do equipamento.</p>
+                </div>
+
+                <div class="beneficio">
+                    <span>❄️</span>
+                    <p><strong>Melhor resfriamento:</strong> ar circula livremente, refrigerando o ambiente de forma mais uniforme e rápida.</p>
+                </div>
+
+                <div class="beneficio">
+                    <span>💧</span>
+                    <p><strong>Eficiência na desumidificação:</strong> evita acúmulo de mofo e mantém o ar mais saudável.</p>
+                </div>
+
+                <div class="beneficio">
+                    <span>⚙️</span>
+                    <p><strong>Menor risco de falhas técnicas:</strong> aparelhos limpos têm menos travamentos e falhas inesperadas.</p>
+                </div>
+            </div>
+
+            <!-- COMO FUNCIONA -->
+            <div class="como-funciona">
+                <h2>Como Funciona</h2>
+
+                <div class="passo">
+                    <span>1️⃣</span>
+                    <p>Avaliação inicial do equipamento e identificação de sujeira acumulada.</p>
+                </div>
+
+                <div class="passo">
+                    <span>2️⃣</span>
+                    <p>Limpeza completa dos filtros, serpentinas e partes internas do ar-condicionado.</p>
+                </div>
+
+                <div class="passo">
+                    <span>3️⃣</span>
+                    <p>Higienização do sistema para eliminar fungos, bactérias e odores.</p>
+                </div>
+
+                <div class="passo">
+                    <span>4️⃣</span>
+                    <p>Teste final do aparelho para garantir eficiência de resfriamento e desumidificação.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- BOTÃO VOLTAR AO TOPO -->
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+<footer>
+    <div class="footer-container">
+        <div class="social">
+            <a href="https://wa.me/5548998463864" target="_blank" class="whatsapp">WhatsApp</a>
+            <a href="https://www.instagram.com/" target="_blank" class="instagram">Instagram</a>
+            <a href="mailto:purificare@tutanota.com" target="_blank" class="email-footer">E-mail</a>
+        </div>
+        <div class="localizacao" title="Atendemos em: Florianópolis, Biguaçu, Palhoça e São José. Acréscimo aplicado para cidades mais distantes.">
+            📍 Florianópolis e região
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
