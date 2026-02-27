@@ -6,6 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+.imagens-lateral {
+    display: flex;
+    flex-wrap: wrap;      /* permite quebrar linha em telas pequenas */
+    gap: 10px;            /* espaço entre imagens */
+    margin-top: 20px;
+    justify-content: flex-start; /* alinhamento à esquerda */
+}
+
+.imagens-lateral img {
+    width: calc(33.33% - 6.66px); /* 3 imagens lado a lado com gap */
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.imagens-lateral img:hover {
+    transform: scale(1.05); /* efeito leve ao passar o mouse */
+}
+
+/* Responsivo: em telas menores, duas ou uma imagem por linha */
+@media(max-width: 900px) {
+    .imagens-lateral img {
+        width: calc(50% - 5px); /* 2 por linha */
+    }
+}
+
+@media(max-width: 600px) {
+    .imagens-lateral img {
+        width: 100%; /* 1 por linha */
+    }
+}
+
+
 /* Checkbox invisível */
 .enviado-checkbox {
     display: none;
@@ -530,6 +564,15 @@
                     <p>Teste final do aparelho para garantir eficiência de resfriamento e desumidificação.</p>
                 </div>
             </div>
+<!-- IMAGENS RESPONSIVAS -->
+<!-- IMAGENS LATERAL DIREITA -->
+<div class="imagens-lateral">
+    <img src="img01.jpg" alt="Imagem 1">
+    <img src="img02.jpg" alt="Imagem 2">
+    <img src="img03.jpg" alt="Imagem 3">
+</div>
+
+
 
         </div>
     </div>
