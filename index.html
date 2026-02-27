@@ -379,6 +379,111 @@
             }
 
         }
+
+    /* ============================= */
+/* 🔥 MELHORIAS PARA CELULAR 🔥 */
+/* ============================= */
+
+@media(max-width: 768px) {
+
+    /* Layout geral */
+    body {
+        background-attachment: scroll;
+    }
+
+    main {
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    /* Header mais organizado */
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .info {
+        flex-direction: column;
+        gap: 6px;
+        font-size: 13px;
+    }
+
+    .btn-contato {
+        width: 100%;
+        max-width: 320px;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    /* Cards mais agradáveis */
+    .orcamento,
+    .faq,
+    .beneficios,
+    .como-funciona {
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    /* Formulário melhor para toque */
+    .orcamento input,
+    .orcamento textarea {
+        font-size: 16px; /* evita zoom automático no iPhone */
+        padding: 14px;
+    }
+
+    .orcamento textarea {
+        height: 180px;
+    }
+
+    .orcamento button {
+        padding: 16px;
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    /* FAQ mais confortável */
+    .accordion label {
+        padding: 16px;
+        font-size: 15px;
+    }
+
+    .conteudo-accordion p {
+        font-size: 14px;
+    }
+
+    /* Benefícios e passos com melhor espaçamento */
+    .beneficio,
+    .passo {
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 14px;
+    }
+
+    /* Footer em coluna */
+    .footer-container {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .social {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* Botão voltar ao topo menor e menos intrusivo */
+    #backToTop {
+        width: 45px;
+        height: 45px;
+        right: 15px;
+        bottom: 20px;
+        font-size: 20px;
+    }
+
+}
     </style>
 </head>
 
@@ -596,3 +701,4 @@
 
 </body>
 </html>
+
